@@ -2,10 +2,10 @@
 namespace App\Repositories;
 
 
-use App\Models\Product;
+use App\Models\Order;
 use Prettus\Repository\Eloquent\BaseRepository;
 
-class ProductRepositoryEloquent extends BaseRepository
+class OrderRepositoryEloquent extends BaseRepository
 {
 
     /**
@@ -15,7 +15,7 @@ class ProductRepositoryEloquent extends BaseRepository
      */
     public function model()
     {
-        return Product::class;
+        return Order::class;
     }
 
     public function get()

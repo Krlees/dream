@@ -98,6 +98,7 @@ class GoodsController extends BaseController
             $classSelects = $this->goods->getAllClassSelects();
             $extendField = $presenter->classSelect($classSelects);
 
+
             $reponse = $this->returnFormFormat('添加商品', $this->formField);
             $reponse['extendField'] = $extendField;
             return view('admin/goods/add', compact('reponse'));

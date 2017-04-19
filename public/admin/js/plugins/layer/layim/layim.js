@@ -445,7 +445,7 @@ xxim.transmit = function(){
             }, 500);
 
             /*
-            that.json(config.api.sendurl, data, function(datas){
+            that.json(config.Api.sendurl, data, function(datas){
 
             });
             */

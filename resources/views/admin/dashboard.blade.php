@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title>H+ 后台主题UI框架 - 首页示例二</title>
+    <title>H+ 后台主题UI框架3213 - 首页示例二</title>
     <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
     <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
 
@@ -33,7 +33,7 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <span class="label label-success pull-right">月</span>
-                        <h5>收入</h5>
+                        <h5>收入{{$kk}}</h5>
                     </div>
                     <div class="ibox-content">
                         <h1 class="no-margins">40 886,200</h1>

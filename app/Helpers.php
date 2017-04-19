@@ -53,5 +53,18 @@ function arrayAddField($array,$key,$value=true)
 
 }
 
+function array2xml($arr) {
+    $xml = '<xml>';
+    foreach($arr as $key => $val) {
+        if(is_numeric($val)) {
+            $xml .= '<'.$key.'>'.$val.'</'.$key.'>';
+        } else {
+            $xml .= '<'.$key.'><![CDATA['.$val.']]></'.$key.'>';
+        }
+    }
+    $xml .= '</xml>';
+    return $xml;
+}
+
 
 

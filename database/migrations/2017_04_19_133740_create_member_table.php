@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductTable extends Migration
+class CreateMemberTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateProductTable extends Migration
      */
     public function up()
     {
-        Schema::create('product', function (Blueprint $table) {
+        Schema::create('member', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('cate_id',false,true)->default(0);
-            $table->string('name',32)->comment('产品名称');
-            $table->decimal('price')->comment('产品价格');
-            $table->string('show_type',32)->comment('页面展示方式,如select,text');
+            $table->string('wxname',32);
+            $table->string('openid',40)->unique();
+            $table->string('mobile',15)->unique();
+            $table->string('student_name',18);
+            $table->string('parent_name',18)->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateProductTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product');
+        Schema::dropIfExists('member');
     }
 }

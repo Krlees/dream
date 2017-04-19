@@ -5,6 +5,13 @@ trait FormTraits
 {
     protected $formField = [];
 
+    /**
+     * @return array
+     */
+    public function getFormField()
+    {
+        return $this->formField;
+    }
 
     /**
      * 表单字段统一回调

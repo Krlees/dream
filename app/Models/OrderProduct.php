@@ -4,17 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Member extends Model
+class OrderProduct extends Model
 {
     /**
      * 与模型关联的数据表
      *
      * @var string
      */
-    protected $table = 'member';
+    protected $table = 'order_product';
 
     protected $primaryKey = 'id';
 
     protected $guarded = [];
-
 }

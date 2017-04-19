@@ -1894,7 +1894,7 @@
                 return null;
             }
 
-            // Setup the fullscreen api
+            // Setup the fullscreen Api
             fullscreen = _fullscreen();
 
             // Sniff out the browser

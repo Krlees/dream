@@ -23,17 +23,14 @@ Route::group(['namespace' => 'Admin','prefix' => 'admin','middleware'=>['auth','
     });
 
     Route::get('index', 'IndexController@index');
-    Route::get('dashboard', function () {
-        return view('admin/dashboard');
-    });
+    Route::get('dashboard', 'IndexController@dashboard');
 
-    Route::group(['prefix' => 'goods'], function () {
-        Route::any('index', 'GoodsController@index');
+    Route::group(['prefix' => 'product'], function () {
+        Route::any('index', 'ProductController@index');
         Route::any('add', 'GoodsController@add');
         Route::any('edit/{id}', 'GoodsController@edit');
         Route::any('del', 'GoodsController@del');
         Route::any('get-sub-class/{id}', 'GoodsController@getSubClass');
-
     });
 
     // 权限管理
@@ -45,6 +42,7 @@ Route::group(['namespace' => 'Admin','prefix' => 'admin','middleware'=>['auth','
         Route::any('get-sub-perm/{id}', 'PermissionController@getSubPerm');
     });
 
+    // 角色管理
     Route::group(['prefix' => 'role'], function () {
         Route::any('index', 'RoleController@index');
         Route::any('show/{id}', 'RoleController@show');
@@ -61,6 +59,7 @@ Route::group(['namespace' => 'Admin','prefix' => 'admin','middleware'=>['auth','
         Route::any('del', 'UsersController@del');
     });
 
+    // 菜单管理
     Route::group(['prefix' => 'menu'], function () {
         Route::any('index', 'MenuController@index');
         Route::any('add', 'MenuController@add');
@@ -101,6 +100,10 @@ Route::get('wap', function (){
 //Route::get('import', 'ExcelController@import');
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
 
 Auth::routes();
 

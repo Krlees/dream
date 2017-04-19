@@ -43,9 +43,7 @@ class UsersController extends BaseController
 
         } else {
 
-            $this->returnFieldFormat('text', '名称', 'data[name]');
-            $this->returnFieldFormat('text', '密码', 'data[password]');
-            $this->returnFieldFormat('email', 'email', 'data[email]');
+
 
             $roles = $this->user->getAllRoles();
             $extendField = $presenter->roleList($roles);

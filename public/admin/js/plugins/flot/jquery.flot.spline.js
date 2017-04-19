@@ -48,7 +48,7 @@
      * @return {Array}: p1 -> control point, from x1 back toward x0
      * 					p2 -> the next control point, returned to become the next segment's p1
      *
-     * @api private
+     * @Api private
      */
     function getControlPoints(x0, y0, x1, y1, x2, y2, tension) {
 
@@ -110,7 +110,7 @@
      * @param {Array} points: 2 points for which to draw the interpolation
      * @param {Array} cpoints: control points for those segment points
      *
-     * @api private
+     * @Api private
      */
     function queue(ctx, type, points, cpoints) {
         if (type === void 0 || (type !== 'bezier' && type !== 'quadratic')) {
@@ -132,7 +132,7 @@
      * @param {Object} ctx: canvas context
      * @param {Object} series
      *
-     * @api private
+     * @Api private
      */
 
     function drawSpline(plot, ctx, series) {

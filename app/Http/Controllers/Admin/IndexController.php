@@ -18,5 +18,10 @@ class IndexController extends BaseController
         return view('admin/index', compact('menus'));
     }
 
+    public function dashboard()
+    {
+        return view('admin/dashboard');
+    }
+
 
 }
