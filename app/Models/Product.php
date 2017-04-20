@@ -15,5 +15,19 @@ class Product extends Model
 
     protected $primaryKey = 'id';
 
-    protected $guarded = [];
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'cate_id', 'name', 'price', 'show_type', 'status'
+    ];
+
+    private $foreignKey = 'cate_id';
+
+    public function category()
+    {
+        return $this->hasMany('App\Models\Categoty', $this->foreignKey);
+    }
 }

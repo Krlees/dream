@@ -66,5 +66,15 @@ function array2xml($arr) {
     return $xml;
 }
 
+function custom_config($code)
+{
+    $arr =  [
+        '0' => '操作成功',
+        '1004' => '缺少必须参数'
+    ];
+
+    return array_get($arr,$code);
+}
+
 
 

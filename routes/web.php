@@ -27,10 +27,10 @@ Route::group(['namespace' => 'Admin','prefix' => 'admin','middleware'=>['auth','
 
     Route::group(['prefix' => 'product'], function () {
         Route::any('index', 'ProductController@index');
-        Route::any('add', 'GoodsController@add');
-        Route::any('edit/{id}', 'GoodsController@edit');
-        Route::any('del', 'GoodsController@del');
-        Route::any('get-sub-class/{id}', 'GoodsController@getSubClass');
+        Route::any('add', 'ProductController@add');
+        Route::any('edit/{id}', 'ProductController@edit');
+        Route::any('del', 'ProductController@del');
+        Route::any('get-sub-class/{id}', 'ProductController@getSubClass');
     });
 
     // 权限管理
@@ -68,6 +68,10 @@ Route::group(['namespace' => 'Admin','prefix' => 'admin','middleware'=>['auth','
         Route::any('get-sub-menu/{id}', 'MenuController@getSubMenu');
     });
 
+});
+
+Route::group(['namespace' => 'Wap','prefix' => 'wap'], function () {
+    Route::get('wxpay','PaymentController@wxpay');
 });
 
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');

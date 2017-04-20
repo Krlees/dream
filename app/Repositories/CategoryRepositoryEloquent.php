@@ -18,9 +18,9 @@ class CategoryRepositoryEloquent extends BaseRepository
         return Category::class;
     }
 
-    public function get()
+    public function getTopCategory()
     {
-
+        return $this->model->where('pid',0)->get();
     }
 
 }

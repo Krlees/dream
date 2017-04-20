@@ -16,4 +16,7 @@ class Menu extends Model
     protected $primaryKey = 'id';
 
     protected $guarded = [];
+
+    public $timestamps = false;
+
 }

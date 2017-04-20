@@ -25,14 +25,8 @@ class PaymentController
         if ($request->ajax()) {
             $data = $request->input('data');
 
-
-
         } else {
-
-
-
-            $reponse = $this->returnFormFormat('添加菜单', $this->formField);
-            return view('admin/menu/add', compact('reponse'));
+            return view('wap/wxpay');
         }
     }
 }

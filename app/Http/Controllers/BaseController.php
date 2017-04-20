@@ -58,6 +58,11 @@ class BaseController extends Controller
      */
     public function responseData($code = 0, $msg = '', $data = [], $target = false, $href = '')
     {
+
+        if( !$msg ){
+            $msg = custom_config($code);
+        }
+
         return response()->json([
             'code' => $code,
             'msg' => $msg,

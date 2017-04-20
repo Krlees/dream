@@ -67,8 +67,7 @@ class MenuService extends BaseService
      */
     public function createData($data)
     {
-        $menuModel = $this->menu->model();
-        $b = $menuModel::create($data);
+        $b = $this->menu->create($data);
 
         return $b ?: false;
     }

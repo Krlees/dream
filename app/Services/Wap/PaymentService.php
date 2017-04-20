@@ -11,9 +11,9 @@ class PaymentService
 {
     private $product;
 
-    public function __construct(ProductRepositoryEloquent $product)
+    public function __construct()
     {
-        $this->product = $product;
+        //$this->product = $product;
     }
 
 

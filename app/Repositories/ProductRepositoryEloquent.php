@@ -18,9 +18,13 @@ class ProductRepositoryEloquent extends BaseRepository
         return Product::class;
     }
 
-    public function get()
+    public function ajaxPageList($offset, $limit, $sort, $order, $where)
     {
+        $sort = $sort ?: $this->model->getKeyName();
+        $rows = $this->model->where($where)->orderBy($sort,$order)->offset($offset)->limit($limit)->get()->toArray();
+        $total = $this->model->where($where)->count();
 
+        return compact('rows', 'total');
     }
 
 }

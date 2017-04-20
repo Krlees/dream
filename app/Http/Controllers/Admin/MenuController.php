@@ -56,6 +56,7 @@ class MenuController extends BaseController
             $this->returnFieldFormat('text', 'Url路由', 'data[url]');
             $this->returnFieldFormat('text', 'Icon', 'data[icon]');
             $this->returnFieldFormat('text', '排序', 'data[sort]');
+            $this->returnFieldFormat('text', '权限名', 'data[permission_name]');
 
             $reponse = $this->returnFormFormat('添加菜单', $this->formField);
             return view('admin/menu/add', compact('reponse'));
