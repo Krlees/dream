@@ -54,8 +54,8 @@
                     </form>
                 @endif
                 <div class="btn-group hidden-xs" id="toolbar" role="group">
-                    {!!  $tablePresenter->bulidCreateAction($action['addUrl']) !!}
-                    {!! $tablePresenter->bulidRemoveAction($action['removeUrl']) !!}
+                    {!!  $tablePresenter->bulidCreateAction(array_get($action,'addUrl')) !!}
+                    {!! $tablePresenter->bulidRemoveAction(array_get($action,'removeUrl')) !!}
                 </div>
                 <table id="table">
                 </table>
@@ -81,9 +81,9 @@
     $('select.chosen-select').chosen({});
 
     var $table = $('#table'),
-            $remove = $('#remove'),
-            selections = [], // 默认选中项
-            uniqueId = 'id'; // 主键key
+        $remove = $('#remove'),
+        selections = [], // 默认选中项
+        uniqueId = 'id'; // 主键key
 
     $(function () {
         initTable();
@@ -172,7 +172,7 @@
         /* 删除事件 */
         $remove.click(function () {
             var ids = getIdSelections();
-            $.getJSON("{{$action['removeUrl']}}", {ids: ids.join(',')}, function (result) {
+            $.getJSON("{{array_get($action,'removeUrl','')}}", {ids: ids.join(',')}, function (result) {
                 if (result.code == '0') {
                     $table.bootstrapTable('remove', {
                         field: uniqueId,
@@ -249,11 +249,11 @@
     /* 操作选项 */
     window.operateEvents = {
         'click .edit': function (e, value, row, index) {
-            window.location.href = "{{$action['editUrl']}}/" + row[uniqueId];
+            window.location.href = "{{array_get($action,'editUrl','')}}/" + row[uniqueId];
 //            alert('You click like action, row: ' + JSON.stringify(row));
         },
         'click .remove': function (e, value, row, index) {
-            $.getJSON("{{$action['removeUrl']}}", {ids: row[uniqueId]}, function (result) {
+            $.getJSON("{{array_get($action,'removeUrl')}}", {ids: row[uniqueId]}, function (result) {
                 if (result.code == '0') {
                     $table.bootstrapTable('removeByUniqueId', row[uniqueId]);   // 根据uniqueId删除指定行
                 }

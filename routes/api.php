@@ -17,6 +17,10 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
-Route::any('seller','Api\SellerController@getSeller');
-Route::any('goods','Api\GoodsController@getGoods');
-Route::any('ratings','Api\RatingController@getSellerRating');
+//Route::any('seller','Api\SellerController@getSeller');
+//Route::any('goods','Api\GoodsController@getGoods');
+//Route::any('ratings','Api\RatingController@getSellerRating');
+
+Route::group(['namespace' => 'Api','middleware' => ['wechat.oauth']], function () {
+    Route::any('order-create','OrderController@create');
+});

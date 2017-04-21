@@ -19,5 +19,19 @@ class OrderService
     {
         $this->order = $order;
     }
+
+    public function ajaxList($param)
+    {
+        $where = [];
+        if (isset($param['search'])) {
+            $where = [
+                ['order_sn', 'like', "%{$param['search']}%", 'or'],
+                ['pay_sn', 'like', "%{$param['search']}%", 'or'],
+            ];
+        }
+
+        return $this->order->ajaxPageList($param['offset'], $param['limit'], $param['sort'], $param['order'], $where);
+
+    }
     
 }

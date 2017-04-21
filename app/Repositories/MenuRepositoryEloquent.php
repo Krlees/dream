@@ -72,5 +72,11 @@ class MenuRepositoryEloquent extends BaseRepository
         return compact('rows', 'total');
     }
 
+    public function delData($ids)
+    {
+        $affected =  $this->model->whereIn('id',$ids)->delete();
+        return $affected ? true : false;
+    }
+
 
 }

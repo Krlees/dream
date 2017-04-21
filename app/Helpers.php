@@ -70,7 +70,8 @@ function custom_config($code)
 {
     $arr =  [
         '0' => '操作成功',
-        '1004' => '缺少必须参数'
+        '1004' => '缺少必须参数',
+        '9000' => '数据库插入失败'
     ];
 
     return array_get($arr,$code);

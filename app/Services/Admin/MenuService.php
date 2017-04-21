@@ -79,5 +79,10 @@ class MenuService extends BaseService
         return $b ?: false;
     }
 
+    public function delData($ids)
+    {
+        return $this->menu->delData($ids);
+    }
+
 
 }

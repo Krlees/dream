@@ -84,14 +84,20 @@ class MenuController extends BaseController
             $this->returnFieldFormat('text', 'Icon', 'data[icon]', $data['icon']);
             $this->returnFieldFormat('text', '排序', 'data[sort]', $data['sort']);
 
-            $reponse = $this->returnFormFormat('编辑菜单', $this->formField, url('admin/menu/edit/'.$id));
+            $reponse = $this->returnFormFormat('编辑菜单', $this->formField, url('admin/menu/edit/' . $id));
             return view('admin/menu/edit', compact('reponse'));
         }
     }
 
-    public function del()
+    public function del(Request $request)
     {
+        $ids = $request->input('ids');
+        if (!is_array($ids)) {
+            $ids = explode(",", $ids);
+        }
 
+        $affected = $this->menu->delData($ids);
+        $affected ? $this->responseData(0) : $this->responseData(200);
     }
 
     /**

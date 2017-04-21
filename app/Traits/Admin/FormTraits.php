@@ -36,8 +36,8 @@ trait FormTraits
     {
         $isForm = $searchField ? true : false;
 
-        $action['add'] = $action['addUrl'] ?: false;
-        $action['remove'] = $action['removeUrl'] ?: false;
+        $action['add'] = array_get($action, 'addUrl', false);
+        $action['remove'] = array_get($action, 'removeUrl', false);
 
         return compact('searchUrl', 'searchField', 'isForm', 'action');
     }
@@ -51,7 +51,8 @@ trait FormTraits
      * @param bool $autoSearch
      * @return array
      */
-    public function returnActionFormat($addUrl=null,$editUrl=null,$removeUrl=null,$autoSearch=true){
+    public function returnActionFormat($addUrl = null, $editUrl = null, $removeUrl = null, $autoSearch = true)
+    {
         return [
             'addUrl' => $addUrl,
             'editUrl' => $editUrl,
@@ -67,13 +68,13 @@ trait FormTraits
      * @param bool $autoSearch
      * @return array
      */
-    public function returnAutoAction($url,$autoSearch=true)
+    public function returnAutoAction($url, $autoSearch = true)
     {
         return [
-            'showUrl' => url($url.'/show'),
-            'addUrl' => url($url.'/add'),
-            'editUrl' => url($url.'/edit'),
-            'removeUrl' => url($url.'/remove'),
+            'showUrl' => url($url . '/show'),
+            'addUrl' => url($url . '/add'),
+            'editUrl' => url($url . '/edit'),
+            'removeUrl' => url($url . '/remove'),
             'autoSearch' => $autoSearch
         ];
     }
@@ -104,7 +105,7 @@ trait FormTraits
      * @param $checkid  为0则不帅选
      * @return array
      */
-    public function returnSelectFormat($data=[], $name, $value, $checkid = 0)
+    public function returnSelectFormat($data = [], $name, $value, $checkid = 0)
     {
         $return = [];
         foreach ($data as $k => $v) {

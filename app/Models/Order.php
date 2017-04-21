@@ -15,5 +15,12 @@ class Order extends Model
 
     protected $primaryKey = 'id';
 
-    protected $guarded = [];
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'order_sn', 'amount', 'pay_sn', 'pay_type', 'status', 'member_id'
+    ];
 }

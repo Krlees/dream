@@ -17,21 +17,13 @@ Route::get('/', function () {
 Route::get('/admin', function () {
     return redirect('admin/index');
 });
-Route::group(['namespace' => 'Admin','prefix' => 'admin','middleware'=>['auth','auth.admin']], function () {
-    Route::get('/login', function() {
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'auth.admin']], function () {
+    Route::get('/login', function () {
         return view('admin/login');
     });
 
     Route::get('index', 'IndexController@index');
     Route::get('dashboard', 'IndexController@dashboard');
-
-    Route::group(['prefix' => 'product'], function () {
-        Route::any('index', 'ProductController@index');
-        Route::any('add', 'ProductController@add');
-        Route::any('edit/{id}', 'ProductController@edit');
-        Route::any('del', 'ProductController@del');
-        Route::any('get-sub-class/{id}', 'ProductController@getSubClass');
-    });
 
     // 权限管理
     Route::group(['prefix' => 'permission'], function () {
@@ -52,6 +44,7 @@ Route::group(['namespace' => 'Admin','prefix' => 'admin','middleware'=>['auth','
         Route::any('{id}', 'RoleController@getInfo');
     });
 
+    // 管理员
     Route::group(['prefix' => 'user'], function () {
         Route::any('index', 'UsersController@index');
         Route::any('add', 'UsersController@add');
@@ -68,16 +61,32 @@ Route::group(['namespace' => 'Admin','prefix' => 'admin','middleware'=>['auth','
         Route::any('get-sub-menu/{id}', 'MenuController@getSubMenu');
     });
 
+    // 产品
+    Route::group(['prefix' => 'product'], function () {
+        Route::any('index', 'ProductController@index');
+        Route::any('add', 'ProductController@add');
+        Route::any('edit/{id}', 'ProductController@edit');
+        Route::any('del', 'ProductController@del');
+        Route::any('get-sub-class/{id}', 'ProductController@getSubClass');
+    });
+
+    // 订单
+    Route::group(['prefix' => 'order'], function () {
+        Route::any('index','OrderController@index');
+        Route::any('detail/{id}','OrderController@detail');
+    });
+
 });
 
-Route::group(['namespace' => 'Wap','prefix' => 'wap'], function () {
-    Route::get('wxpay','PaymentController@wxpay');
+Route::group(['namespace' => 'Wap', 'prefix' => 'wap', 'middleware' => ['wechat.oauth']], function () {
+    Route::get('wxpay', 'PaymentController@wxpay');
+    Route::get('my-order', 'Mycontroller@order');
+    Route::get('ajax-order', 'Mycontroller@ajaxOrder');
+
 });
 
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
-Route::get('wap', function (){
-    return view('Eleme');
-});
+
 
 
 //
@@ -102,7 +111,6 @@ Route::get('wap', function (){
 //
 //Route::get('excel', 'ExcelController@export');
 //Route::get('import', 'ExcelController@import');
-
 
 
 Auth::routes();

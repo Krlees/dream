@@ -10,8 +10,9 @@ namespace App\Http\Controllers\Wap;
 
 use App\Services\Wap\PaymentService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class PaymentController
+class PaymentController extends BaseController
 {
 
     private $payment;
@@ -20,13 +21,9 @@ class PaymentController
         $this->payment = $payment;
     }
 
-    public function wxpay(Request $request)
+    public function wxpay()
     {
-        if ($request->ajax()) {
-            $data = $request->input('data');
-
-        } else {
-            return view('wap/wxpay');
-        }
+        $products = $this->payment->getAllProducts();
+        return view('wap/wxpay', compact('products'));
     }
 }

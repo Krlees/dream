@@ -107,7 +107,7 @@
         min-width: 320px;
         color: #555;
         padding-bottom: 8%;
-        background: #fef9f1;
+        /*background: #fef9f1;*/
         height: 100%;
     }
 
@@ -223,184 +223,90 @@
         color: #FFF;
     }
 
-    .form-group {
-        display: -webkit-flex; /* Safari */
-        display: flex;
-        margin-top: 18px;
-    }
-
-    .form-group .title {
-        flex: 0 0 80px;
-    }
-
-    .form-group .title label {
-        height: 32px;
-        line-height: 32px;
-        padding-left: 12px;
-    }
-
-    .form-group .row {
-        flex: 1
-    }
-
-    .form-group .row a {
-        display: inline-block;
-        min-width: 20%;
-    }
-
-    .footer {
-        position: fixed;
-        bottom: 0;
-        height: 90px;
-        width: 100%
-    }
-
-    .footer {
-        text-align: right;
-    }
-
-    .footer .footer-title {
-    }
-
-    .footer .footer-title .price {
-        height: 38px;
-        line-height: 26px;
-        padding-top: 12px;
-        padding-right: 12px;
-    }
-
-    .footer .footer-title .price i {
-        margin-left: 8px;
-        font-size: 24px;
-        color: darkred;
-    }
-
-    .footer .footer-content {
-        padding-right: 12px;
-    }
-
     .checked {
         background-color: #1ab394;
         border-color: #1ab394;
         color: #FFF;
     }
-</style>
+    .header{
+        height: 32px;
+        line-height: 32px;
+        padding-left: 12px;
+    }
 
-<body class="gray-bg" style="margin: 0">
+    .border-bottom {
+        position: relative;
+        border-top: none !important;
+    }
+
+    .border-bottom::after {
+        content: " ";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 1px;
+        background-color: #e4e4e4;
+        -webkit-transform-origin: left bottom;
+        transform-origin: left bottom;
+    }
+
+
+
+</style>
+<link href="{{asset('admin/css/bootstrap.min.css?v=3.3.6')}}" rel="stylesheet">
+<link href="{{asset('admin/css/plugins/bootstrap-table/bootstrap-table.min.css')}}" rel="stylesheet">
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="{{asset('admin/js/bootstrap.min.js?v=3.3.6')}}"></script>
+<script src="{{asset('admin/js/plugins/bootstrap-table/bootstrap-table.min.js')}}"></script>
+<script src="{{asset('admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js')}}"></script>
+<body>
 
 <div class="header">
-    <div class="banner">
-        <img src="http://p3.pstatp.com/large/1c5c00034e79ae135113" alt="">
-    </div>
-    <div class="title">
-        缴费功能
-    </div>
+        我的缴费记录
 </div>
 <div class="border-bottom"></div>
-
 <div class="wrapper">
-
-    <div class="wrapper-content">
-
-        @foreach($products as $val)
-            <div class="form-group">
-                <div class="title">
-                    <label>
-                        {{$val->name}}
-                    </label>
-                </div>
-                <div class="row">
-                    @foreach($val->product as $k=>$v)
-                        <a data-id="{{$v->id}}" data-price="{{$v->price}}"
-                           class="col-md-4 btn-default btn {{$v->show_type}}"
-                           href="javascript:;" class="btn btn-white">{{$v->name}}</a>
-                    @endforeach
-                </div>
-            </div>
-        @endforeach
-    </div>
+    <table id="table" data-mobile-responsive="true">
+    </table>
 </div>
 
-<div class="wrapper footer">
-    <div class="footer-title">
-        <div class="price">总价格：<i id="amount"></i></div>
-    </div>
-    <div class="footer-content">
-        <a class="col-md-4 btn-primary btn" style="width: 140px" href="javascript:;"
-           class="btn btn-white" id="create-order">微信支付</a>
-    </div>
-</div>
 
 <!-- 全局js -->
-<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script type="text/javascript">
-
-
-$(function () {
-
-    var Radio = $(".radio");
-    var Checkbox = $(".checkbox");
-
-    // 初始化选中
-    Radio.eq(0).addClass('checked');
-    totalPrice();
-
-    // 单选类
-    Radio.click(function () {
-        $(this).addClass('checked').siblings().removeClass('checked');
-
-        totalPrice();
+    $(function () {
+        initTable();
     });
 
-    // 全选类
-    Checkbox.click(function () {
-        if ($(this).hasClass('checked')) {
-            $(this).removeClass('checked');
-        }
-        else {
-            $(this).addClass('checked');
-        }
-
-        totalPrice();
-    });
-
-    $("#create-order").click(function () {
-        createOrder();
-    });
-
-    /**
-     * 价格汇总
-     */
-    function totalPrice() {
-        var amount = 0;
-        $(".checked").each(function (i, v) {
-            amount += v.getAttribute('data-price') - 0;
+    /* 初始化表格 */
+    function initTable() {
+        $('#table').bootstrapTable({
+            height: '',
+            url: "{{url('wap/ajax-order')}}",
+            sidePagination: "server",
+            columns: [
+                {
+                    field: 'order_sn',
+                    title: '订单号'
+                }, {
+                    field: 'productDesc',
+                    title: '费用清单'
+                }, {
+                    field: 'amount',
+                    title: '总价格'
+                }, {
+                    field: 'created_at',
+                    title: '时间'
+                }
+            ]
         });
 
-        $("#amount").text("￥" + amount.toFixed(2));
-    }
-
-    /**
-     * [提交订单]
-     * @return {[type]} [description]
-     */
-    function createOrder() {
-        var proIds = [];
-        var amount = 0;
-        $(".checked").each(function (i, v) {
-            proIds.push(v.getAttribute('data-id'));
-            amount += v.getAttribute('data-price') - 0;
-        });
-
-        $.post('{{url("Api/order-create")}}', {ids: proIds, amount: amount}, function (result) {
-            if (result.code == '0') {
-                // 调用微信支付
-            }
-        });
+        setTimeout(function () {
+            $('#table').bootstrapTable('resetView');
+        }, 200);
     }
 
 
-})
 </script>
 </body>
 </html>

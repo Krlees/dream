@@ -16,4 +16,13 @@ class OrderProduct extends Model
     protected $primaryKey = 'id';
 
     protected $guarded = [];
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'order_id', 'pro_id', 'pro_name', 'price'
+    ];
 }

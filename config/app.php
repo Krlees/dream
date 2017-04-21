@@ -184,6 +184,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,      // form表单扩展包
         Zizaco\Entrust\EntrustServiceProvider::class,    // 角色权限包
         Arcanedev\LogViewer\LogViewerServiceProvider::class, // logview日子包
+        Overtrue\LaravelWechat\ServiceProvider::class    // 微信包
 
     ],
 
@@ -240,6 +241,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+        'EasyWeChat' => Overtrue\LaravelWechat\Facade::class,
     ],
 
 ];
