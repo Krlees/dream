@@ -248,6 +248,10 @@
 
     /* 操作选项 */
     window.operateEvents = {
+        'click .view': function (e, value, row, index) {
+            window.location.href = "{{array_get($action,'showUrl','')}}/" + row[uniqueId];
+//            alert('You click like action, row: ' + JSON.stringify(row));
+        },
         'click .edit': function (e, value, row, index) {
             window.location.href = "{{array_get($action,'editUrl','')}}/" + row[uniqueId];
 //            alert('You click like action, row: ' + JSON.stringify(row));

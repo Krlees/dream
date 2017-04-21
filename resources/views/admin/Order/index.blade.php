@@ -16,7 +16,15 @@
                 {!! $tablePresenter->jsColums('支付方式','pay_type') !!}
                 {!! $tablePresenter->jsColums('状态','status') !!}
                 {!! $tablePresenter->jsColums('下单时间','created_at') !!}
-                {!! $tablePresenter->jsEvents() !!}
+                {
+                    'field' : '',
+                    'title' : '操作',
+                    'align' : 'center',
+                    'events' : 'operateEvents',
+                    'formatter' : function(value, row, index){
+                        return operateFormatter(row, ['view'] );
+                    }
+                },
         ];
         
         function formatIcon(data) {

@@ -26,7 +26,7 @@ class OrderController extends BaseController
 
         } else {
             $reponse = $this->returnSearchFormat(url('admin/order/index'), false, [
-                'viewUrl' => url('admin/order/detail'),
+                'showUrl' => url('admin/order/detail'),
                 'autoSearch' => true
             ]);
 

@@ -33,7 +33,7 @@ class MenuRepositoryEloquent extends BaseRepository
      */
     public function getAllMenu()
     {
-        $menus = $this->model->where(['pid' => 0])->orderBy('sort','desc')->get();
+        $menus = $this->model->where(['pid' => 0, 'is_show' => 1])->orderBy('sort', 'desc')->get();
         foreach ($menus as $k => $v) {
             $v->sub = $this->model->where(['pid' => $v['id']])->get();
         }
@@ -50,7 +50,7 @@ class MenuRepositoryEloquent extends BaseRepository
      */
     public function getMenuSelects($id)
     {
-        return $this->model->where(['pid'=>$id])->get();
+        return $this->model->where(['pid' => $id])->get();
     }
 
     /**
@@ -63,10 +63,10 @@ class MenuRepositoryEloquent extends BaseRepository
      * @param array $where
      * @return array
      */
-    public function ajaxMenuList($offset, $limit, $sort=false, $order, $where = [])
+    public function ajaxMenuList($offset, $limit, $sort = false, $order, $where = [])
     {
         $sort = $sort ?: $this->model->getKeyName();
-        $rows = $this->model->where($where)->orderBy($sort,$order)->offset(0)->limit($limit)->get()->toArray();
+        $rows = $this->model->where($where)->orderBy($sort, $order)->offset(0)->limit($limit)->get()->toArray();
         $total = $this->model->where($where)->count();
 
         return compact('rows', 'total');
@@ -74,7 +74,7 @@ class MenuRepositoryEloquent extends BaseRepository
 
     public function delData($ids)
     {
-        $affected =  $this->model->whereIn('id',$ids)->delete();
+        $affected = $this->model->whereIn('id', $ids)->delete();
         return $affected ? true : false;
     }
 
